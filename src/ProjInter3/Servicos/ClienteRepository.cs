@@ -25,7 +25,11 @@ namespace ProjInter3.Servicos
             cmd.AddParameter("@SOBRENOME", cliente.Sobrenome);
             cmd.AddParameter("@CPF", cliente.Cpf);
 
-            cmd.ExecuteNonQuery();
+            var reader = cmd.ExecuteReader();
+            reader.Read();
+
+            cliente.Id = reader.GetInt32(0);
+            
             connection.Close();
         }
 
